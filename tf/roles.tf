@@ -58,5 +58,15 @@ data "aws_iam_policy_document" "ecs_autoscale_role_policy_document" {
 
 resource "aws_iam_role" "task_role" {
   name               = "sb-ecs-task-role"
-  assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.task_role_assume_policy.json
+}
+
+data "aws_iam_policy_document" "task_role_assume_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["ecs-tasks.amazonaws.com"]
+    }
+  }
 }

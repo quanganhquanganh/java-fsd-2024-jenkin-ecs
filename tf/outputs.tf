@@ -6,13 +6,11 @@ output "ecr_repository" {
   value = "${module.ecr.repository_url}"
 }
 
-output "access_key_id" {
-  value       = aws_iam_access_key.user_access_key.id
-  description = "The access key ID for the IAM user"
+output "jenkins_ecr_user_access_key" {
+  value = aws_iam_access_key.jenkins_ecr_user_key.id
 }
 
-output "secret_access_key" {
-  value       = aws_iam_access_key.user_access_key.secret
-  description = "The secret access key for the IAM user"
-  sensitive   = true
+output "jenkins_ecr_user_secret_key" {
+  value     = aws_iam_access_key.jenkins_ecr_user_key.secret
+  sensitive = true
 }
